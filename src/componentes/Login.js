@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState } from "react/cjs/react.development"
 import axios from "axios"
 import logo from "../assets/images/logo.png"
@@ -22,7 +22,7 @@ export default function Login(){
         promisse.then(response => {
             const {data} = response;
             console.log(data)
-            navigate("/habitos")
+            navigate("/habitos", {state: data})
         })
         promisse.catch(err => {
             setLoad("entrar")

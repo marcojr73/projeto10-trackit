@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import track from "../assets/images/track.png"
 
-export default function Top(){
+export default function Top(props){
     return(
         <Container>
             <img className="logo" src={track} />
-            <img className="profile" src={track} />
+            <img className="profile" src={props.state.image} />
         </Container>
     )
 }

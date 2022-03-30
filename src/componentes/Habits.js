@@ -1,3 +1,4 @@
+import { useLocation } from "react-router"
 import Top from "./Top"
 import styled from "styled-components"
 import Footer from "./Footer"
@@ -5,9 +6,12 @@ import Header from "./Header"
 import Info from "./info"
 
 export default function Habits(){
+
+    const {state} = useLocation();
+
     return(
         <Container>
-            <Top/>
+            <Top state={state}/>
             <Header/>
             <Info/>
             <Footer/>
