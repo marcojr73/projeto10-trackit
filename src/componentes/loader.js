@@ -7,7 +7,7 @@ export default function Loader() {
     return (
         <div>
             <Circles
-                align="right"
+                align="center"
                 heigth="30"
                 width="30"
                 color='white'

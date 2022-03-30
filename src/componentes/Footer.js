@@ -1,11 +1,12 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 export default function Footer(){
     return(
         <Foot>
-            <p>Hábitos</p>
-            <div>circle</div>
-            <p>Histórico</p>
+            <Link to="habitos"><p>Hábitos</p></Link>
+            <Link to="hoje"><div>circle</div></Link>
+            <Link to="historico"><p>Histórico</p></Link>    
         </Foot>
     )
 }
@@ -13,12 +14,17 @@ export default function Footer(){
 const Foot = styled.footer`
     width: 100%;
     height: 70px;
-    background: #52B6FF;
+    background: #FFFFFF;
     position: fixed;
     bottom: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-size: 18px;
-    color: #FFFFFF;
+    color: #52B6FF;
+
+    a{
+        text-decoration: none;
+        color: #52B6FF;
+    }
 `

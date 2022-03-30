@@ -4,8 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Habits from "./Habits";
 import Login from "./Login"
 import Register from "./Register"
-import Testes from "./Testes";
 import GlobalStyle from "./layout/GlobalStyle";
+import Hoje from "./Hoje";
+import Historic from "./Historic";
 
 export default function App(){
     return(
@@ -15,7 +16,8 @@ export default function App(){
             <Route path="/" element={<Login/>} > </Route>
             <Route path="/cadastro" element={<Register/>} > </Route>
             <Route path="/habitos" element={<Habits/>} > </Route>
-            <Route path="/testes" element={<Testes/>} > </Route>
+            <Route path="/habitos/hoje" element={<Hoje/>} > </Route>
+            <Route path="/habitos/historico" element={<Historic/>} > </Route>
         </Routes>
         </BrowserRouter>        
     )

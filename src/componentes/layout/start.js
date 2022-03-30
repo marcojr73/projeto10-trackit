@@ -60,7 +60,9 @@ const Container = styled.main`
     }
 
     .sub{
-        tex-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         top: 381px;
         border-radius: 5px;
         background-color: #52B6FF;
