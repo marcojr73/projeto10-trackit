@@ -53,6 +53,9 @@ const Container = styled.main`
     }
 
     .send{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         top: 483px;
         border-radius: 5px;
         background-color: #52B6FF;

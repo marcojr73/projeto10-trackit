@@ -4,7 +4,7 @@ import track from "../assets/images/track.png"
 export default function Top(props){
     return(
         <Container>
-            <img className="logo" src={track} />
+            <p>Tracklit</p>
             <img className="profile" src={props.state.image} />
         </Container>
     )
@@ -18,9 +18,10 @@ const Container = styled.header `
     justify-content: space-between;
     align-items: center;
 
-    .logo{
-        width: 115px;
-        height: 49px;
+    p{
+        font-family: Playball;
+        font-size: 39px;
+        color: #FFFFFF;
         margin-left: 18px;
     }
 

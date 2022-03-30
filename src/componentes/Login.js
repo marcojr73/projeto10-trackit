@@ -3,7 +3,7 @@ import { useState } from "react/cjs/react.development"
 import axios from "axios"
 import logo from "../assets/images/logo.png"
 import Container from "./layout/start" 
-import Loader from "./loader"
+import Loader from "./layout/loader"
 
 export default function Login(){
 

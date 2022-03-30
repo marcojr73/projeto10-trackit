@@ -7,7 +7,7 @@ import styled from "styled-components"
 
 import logo from "../assets/images/logo.png"
 import Container from "./layout/start" 
-import Loader from "./loader"
+import Loader from "./layout/loader"
 
 export default function Register(){
     // const [data, setData] = useState({email:"",name:"",image:"",password:""})
@@ -39,7 +39,7 @@ export default function Register(){
             navigate("/")
         })
         promisse.catch(err => {
-            console.log(err.response)
+            alert("deu ruim em" + err.response)
             setLoad("Registrar")
         })
         

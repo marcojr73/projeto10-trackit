@@ -1,19 +1,23 @@
 import React from "react";
+import styled from "styled-components";
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-import { Circles } from "react-loader-spinner";
+import { Bars } from "react-loader-spinner";
 
 export default function Loader() {
     return (
-        <div>
-            <Circles
+        <Container>
+            <Bars
                 align="center"
                 heigth="30"
                 width="30"
                 color='white'
                 ariaLabel='loading'
             />
-            <h1>eu sou o load</h1>
-        </div>
+        </Container>
     )
 }
+
+const Container = styled.div`
+    /* background: red; */
+`
