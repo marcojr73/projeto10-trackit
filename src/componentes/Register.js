@@ -1,9 +1,13 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+
 import axios from "axios"
+
 import styled from "styled-components"
+
 import logo from "../assets/images/logo.png"
 import Container from "./layout/start" 
+import Loader from "./loader"
 
 export default function Register(){
     // const [data, setData] = useState({email:"",name:"",image:"",password:""})
@@ -13,6 +17,7 @@ export default function Register(){
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [image, setImage] = useState("");
+    const [load, setLoad] = useState("Cadastrar")
     const navigate = useNavigate();
     
 
@@ -25,7 +30,7 @@ export default function Register(){
             password: password,
         }
         console.log(post)
-
+        setLoad(<Loader/>)
         const promisse = axios.post(url, post);
 
         promisse.then(response => {
@@ -33,7 +38,10 @@ export default function Register(){
             console.log(data);
             navigate("/")
         })
-        promisse.catch(err => console.log(err.response))
+        promisse.catch(err => {
+            console.log(err.response)
+            setLoad("Registrar")
+        })
         
         
     }
@@ -46,7 +54,7 @@ export default function Register(){
                 <input required value={password} onChange={(e)=>setPassword(e.target.value)} className="pass" placeholder="senha" type="password"></input>
                 <input required value={name} onChange={(e)=>setName(e.target.value)} className="name" placeholder="nome" type="text"></input>
                 <input required value={image} onChange={(e)=>setImage(e.target.value)} className="pic" placeholder="foto (url)" type="text"></input>
-                <button className="send" type="submit" >Entrar</button>
+                <button className="send" type="submit" >{load}</button>
             </form>
             <Link to="/">
                 <p className="to-log">Já tem uma conta? faça login</p>
