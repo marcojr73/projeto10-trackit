@@ -5,7 +5,25 @@ import logo from "../assets/images/logo.png"
 import Container from "./layout/start" 
 
 export default function Login(){
-    
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
+    const objLogin = {email:email, password:password}
+    const navigate = useNavigate();
+
+    function logUser(e){
+        e.preventDefault();
+        console.log(objLogin);
+
+        const promisse = axios.post(url,objLogin);
+        promisse.then(response => {
+            const {data} = response;
+            console.log(data)
+            navigate("/habitos")
+        })
+        promisse.catch(err => console.log(err.response))
+    }
 
     return(
         <Container>
