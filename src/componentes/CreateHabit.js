@@ -19,7 +19,6 @@ export default function CreateHabit({habits, setHabits, token}){
         } else {
             setDaysSelected(new Map(daysSelected.set(index, day)))
         }
-        console.log([...daysSelected.keys()] )
     }
 
     function generate(){
@@ -105,6 +104,7 @@ const Container = styled.div`
         height: 30px;
         color: #DBDBDB;
         border: 1px solid #D5D5D5;
+        cursor: pointer;
     }
     
     .selected{

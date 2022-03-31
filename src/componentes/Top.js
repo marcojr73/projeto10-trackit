@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import track from "../assets/images/track.png"
 
 export default function Top(props){
     return(

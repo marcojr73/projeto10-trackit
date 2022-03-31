@@ -1,9 +1,12 @@
 import styled from "styled-components"
 
-export default function Info(){
-    return(
-        <Container>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Container>
-    )
+export default function Info({info}){
+    if(info === true){
+        return(
+            <Container>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Container>
+        )
+    }
+    return(<></>)
 }
 
 const Container = styled.p`

@@ -5,13 +5,13 @@ import Footer from "./Footer"
 import CreateHabit from "./CreateHabit"
 import Info from "./info"
 import { useState } from "react/cjs/react.development"
+import ListHabits from "./ListHabits"
 
 export default function Habits(){
-
+    const [info, setInfo] = useState(true);
     const {state} = useLocation();
     const [habits, setHabits] = useState(false)
 
-   
     return(
         <Container>
             <Top state={state}/>
@@ -19,9 +19,9 @@ export default function Habits(){
                 <h1>Meus Hábitos</h1>
                 <div onClick={()=>setHabits(!habits)} className="plus">+</div>
             </section>
-
             <CreateHabit habits={habits} setHabits={setHabits} token={state.token}/>
-            <Info/>
+            <ListHabits token={state.token} setInfo={setInfo}/>
+            <Info info={info}/>
             <Footer/>
         </Container>
     )
@@ -43,10 +43,6 @@ const Container = styled.main`
         color: #126BA5;
         font-weight: 400;
         margin-bottom: 20px
-    }
-
-
-    h1{
     }
 
     .plus{
