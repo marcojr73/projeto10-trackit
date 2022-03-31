@@ -11,6 +11,7 @@ export default function Habits(){
     const [info, setInfo] = useState(true);
     const {state} = useLocation();
     const [habits, setHabits] = useState(false)
+    
 
     return(
         <Container>

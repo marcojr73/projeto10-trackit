@@ -16,8 +16,8 @@ export default function App(){
             <Route path="/" element={<Login/>} > </Route>
             <Route path="/cadastro" element={<Register/>} > </Route>
             <Route path="/habitos" element={<Habits/>} > </Route>
-            <Route path="/habitos/hoje" element={<Hoje/>} > </Route>
-            <Route path="/habitos/historico" element={<Historic/>} > </Route>
+            <Route path="/hoje" element={<Hoje/>} > </Route>
+            <Route path="/historico" element={<Historic/>} > </Route>
         </Routes>
         </BrowserRouter>        
     )
