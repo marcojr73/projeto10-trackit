@@ -1,9 +1,14 @@
+import axios from "axios";
+import { useEffect } from "react";
 import { matchRoutes } from "react-router";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components"
+import Loader from "./layout/loader";
 
-export default function CreateHabit({habits, setHabits}){
+export default function CreateHabit({habits, setHabits, token}){
     const [daysSelected, setDaysSelected] = useState(new Map())
+    const [nameHabit, setNameHabit] = useState("")
+    const [load, setLoad] = useState("Salvar");
     const week = ["D","S","T","Q","Q","S","S"];
 
     function filterDays(index, day){
@@ -14,14 +19,43 @@ export default function CreateHabit({habits, setHabits}){
         } else {
             setDaysSelected(new Map(daysSelected.set(index, day)))
         }
-        console.log(daysSelected)
+        console.log([...daysSelected.keys()] )
+    }
+
+    function generate(){
+        setLoad(<Loader/>)
+
+        const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+
+        const config = {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        }
+
+        const objHabit = {
+            name: nameHabit,
+            days: [...daysSelected.keys()]
+        }
+
+        const promisse = axios.post(url, objHabit, config);
+        promisse.then(response => {
+            const {data} = response;
+            setLoad("Salvar")
+            setNameHabit("")
+            setDaysSelected(new Map())
+            console.log(data);
+        })
+        promisse.catch(err => {
+            alert("deu ruim")
+            setLoad("Salvar")
+        })
     }
     
     if(habits===true){
-
             return(
                 <Container>
-                    <input className="nameTxt" type="text" placeholder="nome do hábito"></input>
+                    <input value={nameHabit} onChange={(e) => setNameHabit(e.target.value)} className="nameTxt" type="text" placeholder="nome do hábito"></input>
                     <div className="days">
                         {
                             week.map((day, index) => {
@@ -34,12 +68,12 @@ export default function CreateHabit({habits, setHabits}){
                         }
                     </div>
                     <button onClick={()=>setHabits(!habits)} className="quit">Cancelar</button>
-                    <button className="save">Salvar</button>
+                    <button onClick={()=>generate()} className="save">{load}</button>
                 </Container>
                 )
     }else{
         return(
-            <><p></p></>
+            <></>
         )
     }
 }
@@ -109,6 +143,9 @@ const Container = styled.div`
     }
 
     .save{
+        display: flex;
+        justify-content:center;
+        align-items: center;
         background: #52B6FF;
         border-radius: 5px;
         border: none;

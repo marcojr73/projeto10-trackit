@@ -20,7 +20,7 @@ export default function Habits(){
                 <div onClick={()=>setHabits(!habits)} className="plus">+</div>
             </section>
 
-            <CreateHabit habits={habits} setHabits={setHabits}/>
+            <CreateHabit habits={habits} setHabits={setHabits} token={state.token}/>
             <Info/>
             <Footer/>
         </Container>
