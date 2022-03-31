@@ -1,24 +1,34 @@
+import { matchRoutes } from "react-router";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components"
 
 export default function CreateHabit({habits, setHabits}){
-    const [days, setDays] = useState([])
-    console.log(days);
+    const [daysSelected, setDaysSelected] = useState(new Map())
     const week = ["D","S","T","Q","Q","S","S"];
 
-    function filterDays(index){
-
+    function filterDays(index, day){
+        const selected = daysSelected.has(index);
+        if(selected){
+            daysSelected.delete(index);
+            setDaysSelected(new Map(daysSelected))
+        } else {
+            setDaysSelected(new Map(daysSelected.set(index, day)))
+        }
+        console.log(daysSelected)
     }
     
     if(habits===true){
+
             return(
                 <Container>
                     <input className="nameTxt" type="text" placeholder="nome do hábito"></input>
                     <div className="days">
                         {
                             week.map((day, index) => {
+                                const selected = daysSelected.has(index);
+                                const css = selected ? `day selected` : "day"
                                 return(
-                                    <div onClick={()=>filterDays([index])} className="day"> {day} </div>
+                                    <div onClick={()=>filterDays(index, day)} className={css}> {day} </div>
                                 )
                             })
                         }
@@ -62,7 +72,12 @@ const Container = styled.div`
         color: #DBDBDB;
         border: 1px solid #D5D5D5;
     }
-
+    
+    .selected{
+        background: #CFCFCF;
+        color: #FFFFFF;
+    }
+    
     .nameTxt{
         width: 303px;
         height: 45px;

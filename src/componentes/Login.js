@@ -35,8 +35,8 @@ export default function Login(){
         <Container>
             <img src={logo}/> 
             <form onSubmit={logUser} >
-                <input  value={email} onChange={(e)=>setEmail(e.target.value)} className="e-mail" placeholder="email" type="email"></input>
-                <input  value={password} onChange={(e)=>setPassword(e.target.value)} className="pass" placeholder="senha" type="password"></input>
+                <input value={email} onChange={(e)=>setEmail(e.target.value)} className="e-mail" placeholder="email" type="email"></input>
+                <input value={password} onChange={(e)=>setPassword(e.target.value)} className="pass" placeholder="senha" type="password"></input>
                 <button className="sub" type="submit" >{load}</button>
             </form>
             <Link to="/cadastro">
