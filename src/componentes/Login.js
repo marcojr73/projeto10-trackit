@@ -4,6 +4,8 @@ import axios from "axios"
 import logo from "../assets/images/logo.png"
 import Container from "./layout/start" 
 import Loader from "./layout/loader"
+import { useContext } from "react"
+import DataContext from "./context/context"
 
 export default function Login(){
 
@@ -14,6 +16,8 @@ export default function Login(){
     const objLogin = {email:email, password:password}
     const navigate = useNavigate();
 
+    const token = useContext(DataContext);
+
     function logUser(e){
         e.preventDefault();
 
@@ -21,7 +25,8 @@ export default function Login(){
         setLoad(<Loader/>)
         promisse.then(response => {
             const {data} = response;
-            console.log(data)
+            token.setToken(data)
+            console.log(token)
             navigate("/habitos", {state: data})
         })
         promisse.catch(err => {

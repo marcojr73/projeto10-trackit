@@ -17,16 +17,18 @@ export default function ListHabits({ token, setInfo }) {
         }
     }
 
-    function deleteHabit(id){
-        // const id = 11671
+    function deleteHabit(id) {
+        // const alert = prompt("vc deseja realmente apagar este hábito? (digite sim para prosseguir)");
 
-        const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
-        promisse.then(response => {
-            alert("vc deletou")
-        })
-        promisse.catch(err => {
-            alert("deletou nn")
-        })
+        // if (alert === "sim") {
+            const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
+            promisse.then(response => {
+                alert("vc deletou")
+            })
+            promisse.catch(err => {
+                alert("deletou nn")
+            })
+        // }
     }
 
     useEffect(() => {
@@ -36,22 +38,21 @@ export default function ListHabits({ token, setInfo }) {
         })
         promisse.catch(err => alert("deu ruim meu patrão"))
     }, [])
-    
+
     if (listHabits.length !== 0) {
         setInfo(false)
         return (
             <div>
                 {
                     listHabits.map((habit, index) => {
-                        console.log(habit.id);
                         return (
                             <ListContainer >
                                 <h1 className="name-habit">{habit.name}</h1>
-                                <img onClick={() => deleteHabit(habit.id)} className="del" src={del}/>
+                                <img onClick={() => deleteHabit(habit.id)} className="del" src={del} />
                                 <div className="week">
                                     {
                                         week.map((day, index) => {
-                                            const changeColor = habit.days.find((e => e == index ))
+                                            const changeColor = habit.days.find((e => e == index))
                                             const css = changeColor !== undefined ? "day selected" : "day";
                                             return (
                                                 <div className={css}>{day}</div>

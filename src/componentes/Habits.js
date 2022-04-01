@@ -30,7 +30,7 @@ export default function Habits(){
 
 const Container = styled.main`
     width:100vw;
-    height: 900px;
+    height: 100vh;
     background: #E5E5E5;
 
     section{
