@@ -5,7 +5,6 @@ import DataContext from "./context/context"
 export default function Top(){
 
     const {token} = useContext(DataContext)
-    console.log(token)
     return(
         <Container>
             <p>Tracklit</p>

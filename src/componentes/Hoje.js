@@ -4,7 +4,7 @@ import { useContext } from "react"
 import DataContext from "./context/context"
 import dayjs, { Dayjs } from "dayjs"
 import styled from "styled-components"
-import check from "../assets/images/check.png"
+
 import ListToDay from "./listToDay"
 export default function Today(){
 
@@ -57,6 +57,7 @@ const ContainerToday = styled.div`
         border-radius: 5px;
         display: flex;
         justify-content: space-between;
+        margin-bottom: 10px;
     }
 
     .txt{
