@@ -79,6 +79,9 @@ const ContainerToday = styled.div`
         justify-content: center;
         align-items: center;
         margin: 13px;
+    }
 
+    .done{
+        background: #8FC549;
     }
 `

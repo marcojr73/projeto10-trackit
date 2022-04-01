@@ -23,9 +23,22 @@ export default function ListToDay() {
         promisse.catch(err => console.log(err))
     }, [])
     console.log(habits);
+
+    function toggle(id, status){
+        const urlCheck = 
+        status ? `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`
+        : `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
+
+        const promisse = axios.post(urlCheck, null, config)
+        promisse.then(response => {
+            setHabits([...habits])
+        })
+        promisse.catch (err => alert("deu ruim"))
+    }
+
     if (habits.length > 0) {
         return (
-            <div>
+            <>
                 {
                     habits.map((habit, index) => {
                         const css = habit.done ? "check done" : "check"
@@ -36,20 +49,12 @@ export default function ListToDay() {
                                     <p className="sequence">Sequencia atual: {habit.currentSequence} dias</p>
                                     <p className="rank">Seu recorde: {habit.highestSequence} dias</p>
                                 </div>
-                                <div className={css}> <img src={check} /> </div>
+                                <div onClick={()=>toggle(habit.id,habit.done)} className={css}> <img src={check} /> </div>
                             </div>
                         )
                     })
                 }
-            </div>
-            // <div className="habit">
-            //     <div className="txt">
-            //         <p className="title">titulo</p>
-            //         <p className="sequence">sequence</p>
-            //         <p className="rank">recorde</p>
-            //     </div>
-            //     <div className="check"> <img src={check} /> </div>
-            // </div>
+            </>
         )
     } else {
         return (
