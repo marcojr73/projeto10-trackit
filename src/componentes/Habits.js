@@ -6,22 +6,25 @@ import CreateHabit from "./CreateHabit"
 import Info from "./info"
 import { useState } from "react/cjs/react.development"
 import ListHabits from "./ListHabits"
+import DataContext from "./context/context"
+import { useContext } from "react"
 
 export default function Habits(){
     const [info, setInfo] = useState(true);
-    const {state} = useLocation();
+    const {token} = useContext(DataContext)
+    // console.log(token)
     const [habits, setHabits] = useState(false)
     
 
     return(
         <Container>
-            <Top state={state}/>
+            <Top state={token}/>
             <section>
                 <h1>Meus Hábitos</h1>
                 <div onClick={()=>setHabits(!habits)} className="plus">+</div>
             </section>
-            <CreateHabit habits={habits} setHabits={setHabits} token={state.token}/>
-            <ListHabits token={state.token} setInfo={setInfo}/>
+            <CreateHabit habits={habits} setHabits={setHabits} token={token.token}/>
+            <ListHabits token={token.token} setInfo={setInfo}/>
             <Info info={info}/>
             <Footer/>
         </Container>

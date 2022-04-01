@@ -1,21 +1,24 @@
 import Footer from "./Footer"
 import Top from "./Top"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import DataContext from "./context/context"
 import dayjs, { Dayjs } from "dayjs"
 import styled from "styled-components"
 
 import ListToDay from "./listToDay"
-export default function Today(){
 
+export default function Today(){
+    const [percent, setPercent] = useState();
+    const completed = percent == 0 ? "nenhum hábito concluido ainda" : `${percent * 100}% dos hábitos concluídos`
+    const css = percent == 0 ? "percent" : "percent green"
     return(
         <ContainerToday>
             <Top/>
-                <div className="head">
-                    <p className="date">{dayjs().locale('pt-br').format('dddd, DD/MM')}</p>
-                    <p className="percent">nenhum hábito concluido ainda</p>
-                </div>
-                <ListToDay/>
+            <div className="head">
+                <p className="date">{dayjs().locale('pt-br').format('dddd, DD/MM')}</p>
+                <p className={css}>{completed}</p>
+            </div>
+            <ListToDay percent={percent} setPercent={setPercent}/>
             <Footer/>
         </ContainerToday>
     )
@@ -39,6 +42,10 @@ const ContainerToday = styled.div`
 
     .percent{
         font-size: 17px;
+    }
+
+    .green{
+        color: #8FC549;
     }
 
     .head{
@@ -83,5 +90,10 @@ const ContainerToday = styled.div`
 
     .done{
         background: #8FC549;
+    }
+
+    .null{
+        margin-top: 188px;
+        text-align: center;
     }
 `

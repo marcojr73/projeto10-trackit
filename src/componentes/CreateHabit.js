@@ -43,7 +43,7 @@ export default function CreateHabit({habits, setHabits, token}){
             setLoad("Salvar")
             setNameHabit("")
             setDaysSelected(new Map())
-            console.log(data);
+            // console.log(data);
         })
         promisse.catch(err => {
             alert("deu ruim")

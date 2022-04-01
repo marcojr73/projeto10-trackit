@@ -4,7 +4,7 @@ import check from "../assets/images/check.png"
 import { useContext } from "react"
 import DataContext from "./context/context"
 
-export default function ListToDay() {
+export default function ListToDay({percent, setPercent}) {
 
     const { token } = useContext(DataContext)
     const [habits, setHabits] = useState([])
@@ -18,11 +18,12 @@ export default function ListToDay() {
         const promisse = axios.get(url, config);
         promisse.then(response => {
             setHabits(response.data)
-            console.log(habits);
+            // console.log(habits);
         })
         promisse.catch(err => console.log(err))
     }, [])
-    console.log(habits);
+
+    
 
     function toggle(id, status){
         const urlCheck = 
@@ -37,17 +38,32 @@ export default function ListToDay() {
     }
 
     if (habits.length > 0) {
+        calculator()
+        function calculator(){
+            const hits = []
+            habits.forEach(habit => {
+                habit.done == true ? hits.push(1) : <></>
+            })
+            setPercent(hits.length/habits.length)
+        }
         return (
             <>
                 {
                     habits.map((habit, index) => {
                         const css = habit.done ? "check done" : "check"
+                        const color = habit.currentSequence == habit.highestSequence && habit.done == true ? "green" : ""
                         return (
                             <div className="habit">
                                 <div className="txt">
                                     <p className="title">{habit.name}</p>
-                                    <p className="sequence">Sequencia atual: {habit.currentSequence} dias</p>
-                                    <p className="rank">Seu recorde: {habit.highestSequence} dias</p>
+                                    <p className="sequence">Sequencia atual: 
+                                    <span className={color}> {habit.currentSequence} dias</span>
+                                    </p>
+
+                                    <p className="rank">Seu recorde: 
+                                    <span className={color}> {habit.highestSequence} dias</span>
+                                    </p>
+
                                 </div>
                                 <div onClick={()=>toggle(habit.id,habit.done)} className={css}> <img src={check} /> </div>
                             </div>
@@ -58,7 +74,7 @@ export default function ListToDay() {
         )
     } else {
         return (
-            <p>Você não tem hábitos para hoje</p>
+            <p className="null">Você não tem hábitos para hoje</p>
         )
     }
 
