@@ -5,11 +5,11 @@ import styled from "styled-components";
 
 import del from "../assets/images/delete.png";
 
-export default function ListHabits({ token, setInfo }) {
+export default function ListHabits({ token, setInfo, listHabits, setListHabits, urlLoad }) {
     const week = ["D", "S", "T", "Q", "Q", "S", "S"];
-    const urlLoad = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+    // const urlLoad = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
     const urlDelete = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/ID_DO_HABITO"
-    let [listHabits, setListHabits] = useState([])
+    // let [listHabits, setListHabits] = useState([])
 
     const config = {
         headers: {
@@ -21,13 +21,18 @@ export default function ListHabits({ token, setInfo }) {
         // const alert = prompt("vc deseja realmente apagar este hábito? (digite sim para prosseguir)");
 
         // if (alert === "sim") {
-            const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
+        const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
+        promisse.then(response => {
+            alert("vc deletou")
+            const promisse = axios.get(urlLoad, config);
             promisse.then(response => {
-                alert("vc deletou")
+                setListHabits([...response.data])
             })
-            promisse.catch(err => {
-                alert("deletou nn")
-            })
+            promisse.catch(err => alert("deu ruim meu patrão"))
+        })
+        promisse.catch(err => {
+            alert("deletou nn")
+        })
         // }
     }
 

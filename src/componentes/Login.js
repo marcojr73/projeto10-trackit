@@ -26,7 +26,7 @@ export default function Login(){
         promisse.then(response => {
             const {data} = response;
             token.setToken(data)
-            navigate("/habitos", {state: data})
+            navigate("/hoje", {state: data})
         })
         promisse.catch(err => {
             setLoad("entrar")

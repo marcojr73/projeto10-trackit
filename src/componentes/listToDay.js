@@ -14,17 +14,16 @@ export default function ListToDay({percent, setPercent}) {
             authorization: `Bearer ${token.token}`
         }
     }
+    
     useEffect(() => {
         const promisse = axios.get(url, config);
         promisse.then(response => {
-            setHabits(response.data)
-            // console.log(habits);
+        setHabits(response.data)
+
         })
         promisse.catch(err => console.log(err))
     }, [])
-
     
-
     function toggle(id, status){
         const urlCheck = 
         status ? `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`
@@ -33,6 +32,11 @@ export default function ListToDay({percent, setPercent}) {
         const promisse = axios.post(urlCheck, null, config)
         promisse.then(response => {
             setHabits([...habits])
+                const promisse = axios.get(url, config);
+                promisse.then(response => {
+                setHabits(response.data)
+                })
+                promisse.catch(err => console.log(err))
         })
         promisse.catch (err => alert("deu ruim"))
     }
@@ -44,7 +48,7 @@ export default function ListToDay({percent, setPercent}) {
             habits.forEach(habit => {
                 habit.done == true ? hits.push(1) : <></>
             })
-            setPercent(hits.length/habits.length)
+            setPercent((hits.length/habits.length))
         }
         return (
             <>
@@ -56,13 +60,15 @@ export default function ListToDay({percent, setPercent}) {
                             <div className="habit">
                                 <div className="txt">
                                     <p className="title">{habit.name}</p>
-                                    <p className="sequence">Sequencia atual: 
-                                    <span className={color}> {habit.currentSequence} dias</span>
-                                    </p>
+                                    <div className="ranking">
+                                        <p className="sequence">Sequencia atual: 
+                                        <span className={color}> {habit.currentSequence} dias</span>
+                                        </p>
 
-                                    <p className="rank">Seu recorde: 
-                                    <span className={color}> {habit.highestSequence} dias</span>
-                                    </p>
+                                        <p className="rank">Seu recorde: 
+                                        <span className={color}> {habit.highestSequence} dias</span>
+                                        </p>
+                                    </div>
 
                                 </div>
                                 <div onClick={()=>toggle(habit.id,habit.done)} className={css}> <img src={check} /> </div>

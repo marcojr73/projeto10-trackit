@@ -12,8 +12,9 @@ import { useContext } from "react"
 export default function Habits(){
     const [info, setInfo] = useState(true);
     const {token} = useContext(DataContext)
-    // console.log(token)
     const [habits, setHabits] = useState(false)
+    let [listHabits, setListHabits] = useState([])
+    const urlLoad = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
     
 
     return(
@@ -23,8 +24,8 @@ export default function Habits(){
                 <h1>Meus Hábitos</h1>
                 <div onClick={()=>setHabits(!habits)} className="plus">+</div>
             </section>
-            <CreateHabit habits={habits} setHabits={setHabits} token={token.token}/>
-            <ListHabits token={token.token} setInfo={setInfo}/>
+            <CreateHabit habits={habits} setHabits={setHabits} token={token.token} setListHabits={setListHabits} urlLoad={urlLoad}/>
+            <ListHabits token={token.token} setInfo={setInfo} listHabits={listHabits} setListHabits={setListHabits} urlLoad={urlLoad}/>
             <Info info={info}/>
             <Footer/>
         </Container>

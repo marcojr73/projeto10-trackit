@@ -4,16 +4,18 @@ import { matchRoutes } from "react-router";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components"
 import Loader from "./layout/loader";
+import ListHabits from "./ListHabits";
 
-export default function CreateHabit({habits, setHabits, token}){
+export default function CreateHabit({ habits, setHabits, token, setListHabits, urlLoad }) {
     const [daysSelected, setDaysSelected] = useState(new Map())
     const [nameHabit, setNameHabit] = useState("")
     const [load, setLoad] = useState("Salvar");
-    const week = ["D","S","T","Q","Q","S","S"];
+    const week = ["D", "S", "T", "Q", "Q", "S", "S"];
+    
 
-    function filterDays(index, day){
+    function filterDays(index, day) {
         const selected = daysSelected.has(index);
-        if(selected){
+        if (selected) {
             daysSelected.delete(index);
             setDaysSelected(new Map(daysSelected))
         } else {
@@ -21,9 +23,9 @@ export default function CreateHabit({habits, setHabits, token}){
         }
     }
 
-    function generate(){
-        setLoad(<Loader/>)
+    function generate() {
 
+        setLoad(<Loader />)
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
 
         const config = {
@@ -39,39 +41,44 @@ export default function CreateHabit({habits, setHabits, token}){
 
         const promisse = axios.post(url, objHabit, config);
         promisse.then(response => {
-            const {data} = response;
+            const { data } = response;
             setLoad("Salvar")
             setNameHabit("")
             setDaysSelected(new Map())
-            // console.log(data);
+
+            const promisse = axios.get(urlLoad, config);
+            promisse.then(response => {
+                setListHabits([...response.data])
+            })
+            promisse.catch(err => alert("deu ruim meu patrão"))
         })
         promisse.catch(err => {
             alert("deu ruim")
             setLoad("Salvar")
         })
     }
-    
-    if(habits===true){
-            return(
-                <Container>
-                    <input value={nameHabit} onChange={(e) => setNameHabit(e.target.value)} className="nameTxt" type="text" placeholder="nome do hábito"></input>
-                    <div className="days">
-                        {
-                            week.map((day, index) => {
-                                const selected = daysSelected.has(index);
-                                const css = selected ? `day selected` : "day"
-                                return(
-                                    <div onClick={()=>filterDays(index, day)} className={css}> {day} </div>
-                                )
-                            })
-                        }
-                    </div>
-                    <button onClick={()=>setHabits(!habits)} className="quit">Cancelar</button>
-                    <button onClick={()=>generate()} className="save">{load}</button>
-                </Container>
-                )
-    }else{
-        return(
+
+    if (habits === true) {
+        return (
+            <Container>
+                <input value={nameHabit} onChange={(e) => setNameHabit(e.target.value)} className="nameTxt" type="text" placeholder="nome do hábito"></input>
+                <div className="days">
+                    {
+                        week.map((day, index) => {
+                            const selected = daysSelected.has(index);
+                            const css = selected ? `day selected` : "day"
+                            return (
+                                <div onClick={() => filterDays(index, day)} className={css}> {day} </div>
+                            )
+                        })
+                    }
+                </div>
+                <button onClick={() => setHabits(!habits)} className="quit">Cancelar</button>
+                <button onClick={() => generate()} className="save">{load}</button>
+            </Container>
+        )
+    } else {
+        return (
             <></>
         )
     }

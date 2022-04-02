@@ -19,7 +19,7 @@ const ContainerHistoric = styled.main`
     width: 100vw;
     height: 100vh;
     margin: auto;
-    font-family: Lexend Deca;
+    font-family: 'Lexend Deca';
     background: #E5E5E5;
 
     .title, .wait{

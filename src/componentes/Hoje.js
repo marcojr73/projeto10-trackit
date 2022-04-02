@@ -8,8 +8,11 @@ import styled from "styled-components"
 import ListToDay from "./listToDay"
 
 export default function Today(){
+    require("dayjs/locale/pt-br")
+    dayjs.locale("pt-br");
     const [percent, setPercent] = useState();
-    const completed = percent == 0 ? "nenhum hábito concluido ainda" : `${percent * 100}% dos hábitos concluídos`
+    console.log(percent);
+    const completed = percent == 0 ? "nenhum hábito concluido ainda" : `${Math.round(percent * 100)}% dos hábitos concluídos`
     const css = percent == 0 ? "percent" : "percent green"
     return(
         <ContainerToday>
@@ -19,7 +22,7 @@ export default function Today(){
                 <p className={css}>{completed}</p>
             </div>
             <ListToDay percent={percent} setPercent={setPercent}/>
-            <Footer/>
+            <Footer percent={percent}/>
         </ContainerToday>
     )
 }
@@ -70,8 +73,11 @@ const ContainerToday = styled.div`
     .txt{
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
         margin-left: 15px;
+        color: #666666;
+        height: 69px;
+        margin-top: 13px;
     }
 
     .title{
