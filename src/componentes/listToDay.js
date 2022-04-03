@@ -1,10 +1,12 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import check from "../assets/images/check.png"
 import { useContext } from "react"
+import { useEffect, useState } from "react"
+
 import DataContext from "./context/context"
 
-export default function ListToDay({percent, setPercent}) {
+import check from "../assets/images/check.png"
+import axios from "axios"
+
+export default function ListToDay({setPercent}) {
 
     const { token } = useContext(DataContext)
     const [habits, setHabits] = useState([])
@@ -32,11 +34,11 @@ export default function ListToDay({percent, setPercent}) {
         const promisse = axios.post(urlCheck, null, config)
         promisse.then(response => {
             setHabits([...habits])
-                const promisse = axios.get(url, config);
-                promisse.then(response => {
-                setHabits(response.data)
-                })
-                promisse.catch(err => console.log(err))
+            const promisse = axios.get(url, config);
+            promisse.then(response => {
+            setHabits(response.data)
+            })
+            promisse.catch(err => console.log(err))
         })
         promisse.catch (err => alert("deu ruim"))
     }

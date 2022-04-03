@@ -11,7 +11,7 @@ export default function Historic(){
                     <h1 className="wait">Em breve você poderá ver o histórico dos seus hábitos aqui</h1>
                 </ContainerHistoric>
             <Footer/>
-            </>
+        </>
     )
 }
 

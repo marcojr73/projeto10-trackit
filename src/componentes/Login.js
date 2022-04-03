@@ -1,15 +1,17 @@
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react/cjs/react.development"
-import axios from "axios"
-import logo from "../assets/images/logo.png"
-import Container from "./layout/start" 
-import Loader from "./layout/loader"
 import { useContext } from "react"
+
+import axios from "axios"
+import Container from "./layout/start" 
 import DataContext from "./context/context"
+import Loader from "./layout/loader"
+
+import logo from "../assets/images/logo.png"
 
 export default function Login(){
 
-    const [load, setLoad] = useState("entrar")
+    const [load, setLoad] = useState("Entrar")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
@@ -23,15 +25,15 @@ export default function Login(){
 
         const promisse = axios.post(url,objLogin);
         setLoad(<Loader/>)
+
         promisse.then(response => {
             const {data} = response;
             token.setToken(data)
             navigate("/hoje", {state: data})
         })
         promisse.catch(err => {
-            setLoad("entrar")
+            setLoad("Entrar")
             alert("usuário não encontrado")
-            console.log(err.response)
         })
     }
 
@@ -39,8 +41,21 @@ export default function Login(){
         <Container>
             <img src={logo}/> 
             <form onSubmit={logUser} >
-                <input value={email} onChange={(e)=>setEmail(e.target.value)} className="e-mail" placeholder="email" type="email"></input>
-                <input value={password} onChange={(e)=>setPassword(e.target.value)} className="pass" placeholder="senha" type="password"></input>
+                <input  value={email}
+                        onChange={(e)=>setEmail(e.target.value)} 
+                        className="e-mail" 
+                        placeholder="email" 
+                        disabled={load !== "Entrar" ? true : false}
+                        type="email">
+                </input>
+                <input  value={password} 
+                        onChange={(e)=>setPassword(e.target.value)} 
+                        className="pass" 
+                        placeholder="senha" 
+                        disabled={load !== "Entrar" ? true : false}
+                        type="password">
+                        
+                </input>
                 <button className="sub" type="submit" >{load}</button>
             </form>
             <Link to="/cadastro">

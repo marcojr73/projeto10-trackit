@@ -1,10 +1,8 @@
+import { useState } from "react";
+
 import axios from "axios";
-import { useEffect } from "react";
-import { matchRoutes } from "react-router";
-import { useState } from "react/cjs/react.development";
 import styled from "styled-components"
 import Loader from "./layout/loader";
-import ListHabits from "./ListHabits";
 
 export default function CreateHabit({ habits, setHabits, token, setListHabits, urlLoad }) {
     const [daysSelected, setDaysSelected] = useState(new Map())
@@ -12,7 +10,6 @@ export default function CreateHabit({ habits, setHabits, token, setListHabits, u
     const [load, setLoad] = useState("Salvar");
     const week = ["D", "S", "T", "Q", "Q", "S", "S"];
     
-
     function filterDays(index, day) {
         const selected = daysSelected.has(index);
         if (selected) {
@@ -24,16 +21,13 @@ export default function CreateHabit({ habits, setHabits, token, setListHabits, u
     }
 
     function generate() {
-
         setLoad(<Loader />)
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
-
         const config = {
             headers: {
                 authorization: `Bearer ${token}`
             }
         }
-
         const objHabit = {
             name: nameHabit,
             days: [...daysSelected.keys()]
@@ -74,7 +68,7 @@ export default function CreateHabit({ habits, setHabits, token, setListHabits, u
                     }
                 </div>
                 <button onClick={() => setHabits(!habits)} className="quit">Cancelar</button>
-                <button onClick={() => generate()} className="save">{load}</button>
+                <button onClick={() => {generate(); setHabits(!habits)}} className="save">{load}</button>
             </Container>
         )
     } else {

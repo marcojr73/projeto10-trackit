@@ -1,13 +1,13 @@
-import { useLocation } from "react-router"
+import { useState } from "react/cjs/react.development"
+import { useContext } from "react"
+
 import Top from "./Top"
 import styled from "styled-components"
 import Footer from "./Footer"
 import CreateHabit from "./CreateHabit"
 import Info from "./info"
-import { useState } from "react/cjs/react.development"
 import ListHabits from "./ListHabits"
 import DataContext from "./context/context"
-import { useContext } from "react"
 
 export default function Habits(){
     const [info, setInfo] = useState(true);
@@ -19,13 +19,23 @@ export default function Habits(){
 
     return(
         <Container>
-            <Top state={token}/>
+            <Top/>
             <section>
                 <h1>Meus Hábitos</h1>
                 <div onClick={()=>setHabits(!habits)} className="plus">+</div>
             </section>
-            <CreateHabit habits={habits} setHabits={setHabits} token={token.token} setListHabits={setListHabits} urlLoad={urlLoad}/>
-            <ListHabits token={token.token} setInfo={setInfo} listHabits={listHabits} setListHabits={setListHabits} urlLoad={urlLoad}/>
+            <CreateHabit habits={habits} 
+                         setHabits={setHabits} 
+                         token={token.token} 
+                         setListHabits={setListHabits} 
+                         urlLoad={urlLoad}/>
+
+            <ListHabits token={token.token} 
+                        setInfo={setInfo} 
+                        listHabits={listHabits} 
+                        setListHabits={setListHabits} 
+                        urlLoad={urlLoad}/>
+
             <Info info={info}/>
             <Footer/>
         </Container>
