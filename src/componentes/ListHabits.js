@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import axios from "axios";
 import styled from "styled-components";
@@ -7,7 +7,6 @@ import del from "../assets/images/delete.png";
 
 export default function ListHabits({ token, setInfo, listHabits, setListHabits, urlLoad }) {
     const week = ["D", "S", "T", "Q", "Q", "S", "S"];
-    const urlDelete = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/ID_DO_HABITO"
 
     const config = {
         headers: {
@@ -20,12 +19,11 @@ export default function ListHabits({ token, setInfo, listHabits, setListHabits, 
 
         const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
         promisse.then(response => {
-            alert("Hábito deletado")
             const promisse = axios.get(urlLoad, config);
             promisse.then(response => {
                 setListHabits([...response.data])
             })
-            promisse.catch(err => alert("deu ruim meu patrão"))
+            promisse.catch(err => alert("Não consegui carregar os seus hábitos"))
         })
         promisse.catch(err => {
             alert("Ocorreu um erro")
@@ -38,8 +36,8 @@ export default function ListHabits({ token, setInfo, listHabits, setListHabits, 
         promisse.then(response => {
             setListHabits([...response.data])
         })
-        promisse.catch(err => alert("deu ruim meu patrão"))
-    }, [])
+        promisse.catch(err => alert("Não consegui carregar os seus hábitos"))
+    }, [config,setListHabits,urlLoad])
 
     if (listHabits.length !== 0) {
         setInfo(false)
@@ -50,11 +48,11 @@ export default function ListHabits({ token, setInfo, listHabits, setListHabits, 
                         return (
                             <ListContainer >
                                 <h1 className="name-habit">{habit.name}</h1>
-                                <img onClick={() => deleteHabit(habit.id)} className="del" src={del} />
+                                <img onClick={() => deleteHabit(habit.id)} className="del" src={del} alt="delete" />
                                 <div className="week">
                                     {
                                         week.map((day, index) => {
-                                            const changeColor = habit.days.find((e => e == index))
+                                            const changeColor = habit.days.find((e => e === index))
                                             const css = changeColor !== undefined ? "day selected" : "day";
                                             return (
                                                 <div className={css}>{day}</div>

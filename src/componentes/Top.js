@@ -1,14 +1,12 @@
-import { useContext } from "react"
 import styled from "styled-components"
-import DataContext from "./context/context"
 
 export default function Top(){
 
-    const {token} = useContext(DataContext)
+    const token = JSON.parse(localStorage.getItem("user"))
     return(
         <Container>
             <p>Tracklit</p>
-            <img className="profile" src={token.image} />
+            <img className="profile" src={token.image} alt="profile" />
         </Container>
     )
 }

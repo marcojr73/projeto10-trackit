@@ -20,6 +20,7 @@ export default function CreateHabit({ habits, setHabits, token, setListHabits, u
         }
     }
 
+    
     function generate() {
         setLoad(<Loader />)
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
@@ -35,7 +36,6 @@ export default function CreateHabit({ habits, setHabits, token, setListHabits, u
 
         const promisse = axios.post(url, objHabit, config);
         promisse.then(response => {
-            const { data } = response;
             setLoad("Salvar")
             setNameHabit("")
             setDaysSelected(new Map())
@@ -43,6 +43,7 @@ export default function CreateHabit({ habits, setHabits, token, setListHabits, u
             const promisse = axios.get(urlLoad, config);
             promisse.then(response => {
                 setListHabits([...response.data])
+                setHabits(!habits)
             })
             promisse.catch(err => alert("deu ruim meu patrão"))
         })
@@ -68,7 +69,7 @@ export default function CreateHabit({ habits, setHabits, token, setListHabits, u
                     }
                 </div>
                 <button onClick={() => setHabits(!habits)} className="quit">Cancelar</button>
-                <button onClick={() => {generate(); setHabits(!habits)}} className="save">{load}</button>
+                <button onClick={() => generate()} className="save">{load}</button>
             </Container>
         )
     } else {

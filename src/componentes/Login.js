@@ -28,8 +28,13 @@ export default function Login(){
 
         promisse.then(response => {
             const {data} = response;
+
+            const handle = JSON.stringify(data)
+            localStorage.setItem("user", handle)
+
             token.setToken(data)
-            navigate("/hoje", {state: data})
+
+            navigate("/hoje")
         })
         promisse.catch(err => {
             setLoad("Entrar")
@@ -39,7 +44,7 @@ export default function Login(){
 
     return(
         <Container>
-            <img src={logo}/> 
+            <img src={logo} alt="logo"/> 
             <form onSubmit={logUser} >
                 <input  value={email}
                         onChange={(e)=>setEmail(e.target.value)} 

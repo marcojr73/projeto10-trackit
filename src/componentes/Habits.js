@@ -1,5 +1,4 @@
 import { useState } from "react/cjs/react.development"
-import { useContext } from "react"
 
 import Top from "./Top"
 import styled from "styled-components"
@@ -7,15 +6,13 @@ import Footer from "./Footer"
 import CreateHabit from "./CreateHabit"
 import Info from "./info"
 import ListHabits from "./ListHabits"
-import DataContext from "./context/context"
 
 export default function Habits(){
     const [info, setInfo] = useState(true);
-    const {token} = useContext(DataContext)
     const [habits, setHabits] = useState(false)
     let [listHabits, setListHabits] = useState([])
     const urlLoad = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
-    
+    const token = JSON.parse(localStorage.getItem("user"))
 
     return(
         <Container>

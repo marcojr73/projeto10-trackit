@@ -14,8 +14,8 @@ export default function Today(){
     require("dayjs/locale/pt-br")
     dayjs.locale("pt-br");
 
-    const completed = percent == 0 ? "nenhum hábito concluido ainda" : `${Math.round(percent * 100)}% dos hábitos concluídos`
-    const css = percent == 0 ? "percent" : "percent green"
+    const completed = percent === 0 ? "nenhum hábito concluido ainda" : `${Math.round(percent * 100)}% dos hábitos concluídos`
+    const css = percent === 0 ? "percent" : "percent green"
 
     return(
         <ContainerToday>

@@ -30,7 +30,6 @@ export default function Register(){
         const promisse = axios.post(url, post);
 
         promisse.then(response => {
-            const {data} = response;
             navigate("/")
         })
         promisse.catch(err => {
@@ -41,7 +40,7 @@ export default function Register(){
 
     return(
         <Container>
-            <img src={logo}/> 
+            <img src={logo} alt="logo"/> 
             <form onSubmit={registerProfile}>
                 <input required value={email}
                         onChange={(e)=>setEmail(e.target.value)} 

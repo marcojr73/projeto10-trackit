@@ -1,14 +1,12 @@
-import { useContext } from "react"
 import { useEffect, useState } from "react"
-
-import DataContext from "./context/context"
 
 import check from "../assets/images/check.png"
 import axios from "axios"
 
 export default function ListToDay({setPercent}) {
 
-    const { token } = useContext(DataContext)
+    const token = JSON.parse(localStorage.getItem("user"))
+
     const [habits, setHabits] = useState([])
     const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today"
     const config = {
@@ -48,7 +46,7 @@ export default function ListToDay({setPercent}) {
         function calculator(){
             const hits = []
             habits.forEach(habit => {
-                habit.done == true ? hits.push(1) : <></>
+                habit.done === true ? hits.push(1) : <></>
             })
             setPercent((hits.length/habits.length))
         }
@@ -57,9 +55,9 @@ export default function ListToDay({setPercent}) {
                 {
                     habits.map((habit, index) => {
                         const css = habit.done ? "check done" : "check"
-                        const color = habit.currentSequence == habit.highestSequence && habit.done == true ? "green" : ""
+                        const color = habit.currentSequence === habit.highestSequence && habit.done === true ? "green" : ""
                         return (
-                            <div className="habit">
+                            <div key={index} className="habit">
                                 <div className="txt">
                                     <p className="title">{habit.name}</p>
                                     <div className="ranking">
@@ -73,7 +71,9 @@ export default function ListToDay({setPercent}) {
                                     </div>
 
                                 </div>
-                                <div onClick={()=>toggle(habit.id,habit.done)} className={css}> <img src={check} /> </div>
+                                <div onClick={()=>toggle(habit.id,habit.done)} className={css}> 
+                                    <img src={check} alt="done" /> 
+                                </div>
                             </div>
                         )
                     })
