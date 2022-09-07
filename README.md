@@ -39,6 +39,7 @@ Instale meu projeto e suas dependências
 - CSS
 - React
 - Persistência de login com local storage
+- Context API
 - React-progress-bar
 - react-loader-spinner
 
