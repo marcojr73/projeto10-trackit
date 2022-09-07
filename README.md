@@ -2,7 +2,7 @@
 # Tracklit
 
 <p align="center">
-   <img width=350 src="./src/assets/images/app.gif"/>
+   <img width=350 src="./src/assets/images/logo.png"/>
 </p>
 
 
@@ -12,6 +12,12 @@
 - [Veja meu deploy na Vercel aqui](https://)
 
 ***
+
+# Demonstração
+
+<p align="center">
+   <img width=350 src="./src/assets/images/app.gif"/>
+</p>
 
 ## Como usar
 
