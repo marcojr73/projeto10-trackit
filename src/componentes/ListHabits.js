@@ -17,17 +17,17 @@ export default function ListHabits({ token, setInfo, listHabits, setListHabits, 
     function deleteHabit(id) {
         if (window.confirm('Deseja realmente excluir esse hábito?')) {
 
-        const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
-        promisse.then(response => {
-            const promisse = axios.get(urlLoad, config);
+            const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
             promisse.then(response => {
-                setListHabits([...response.data])
+                const promisse = axios.get(urlLoad, config);
+                promisse.then(response => {
+                    setListHabits([...response.data])
+                })
+                promisse.catch(err => alert("Não consegui carregar os seus hábitos"))
             })
-            promisse.catch(err => alert("Não consegui carregar os seus hábitos"))
-        })
-        promisse.catch(err => {
-            alert("Ocorreu um erro")
-        })
+            promisse.catch(err => {
+                alert("Ocorreu um erro")
+            })
         }
     }
 
@@ -37,7 +37,7 @@ export default function ListHabits({ token, setInfo, listHabits, setListHabits, 
             setListHabits([...response.data])
         })
         promisse.catch(err => alert("Não foi possível carregar os seus hábitos"))
-    }, [config,setListHabits,urlLoad])
+    }, [config, setListHabits, urlLoad])
 
     useEffect(() => {
         setInfo(false)
@@ -45,11 +45,11 @@ export default function ListHabits({ token, setInfo, listHabits, setListHabits, 
 
     if (listHabits.length !== 0) {
         return (
-            <div>
-                {
-                    listHabits.map(habit => {
-                        return (
-                            <ListContainer >
+            <ul>
+                {listHabits.map(habit => {
+                    return (
+                        <ListContainer >
+                            <li key={habit.id}>
                                 <h1 className="name-habit">{habit.name}</h1>
                                 <img onClick={() => deleteHabit(habit.id)} className="del" src={del} alt="delete" />
                                 <div className="week">
@@ -63,11 +63,11 @@ export default function ListHabits({ token, setInfo, listHabits, setListHabits, 
                                         })
                                     }
                                 </div>
-                            </ListContainer >
-                        )
-                    })
-                }
-            </div>
+                            </li>
+                        </ListContainer >
+                    )
+                })}
+            </ul>
         )
     } else {
         return (<></>)
@@ -75,13 +75,15 @@ export default function ListHabits({ token, setInfo, listHabits, setListHabits, 
 }
 
 const ListContainer = styled.div`
-    width: 340px;
-    height: 91px;
-    background: #FFFFFF;
-    margin:auto;
-    position: relative;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    li{
+        width: 340px;
+        height: 91px;
+        background: #FFFFFF;
+        margin:auto;
+        position: relative;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
 
     .name-habit{
         width: 303px;
