@@ -1,12 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react/cjs/react.development"
-import { useContext } from "react"
-
 import axios from "axios"
-import Container from "./layout/start" 
-import {DataContext} from "./context/context"
-import Loader from "./layout/loader"
 
+import Container from "./layout/start" 
+import Loader from "./layout/loader"
 import logo from "../assets/images/logo.png"
 
 export default function Login(){
