@@ -2,7 +2,7 @@ import { useContext } from "react"
 
 import Footer from "./Footer"
 import Top from "./Top"
-import DataContext from "./context/context"
+import {DataContext} from "./context/context"
 import dayjs from "dayjs"
 import styled from "styled-components"
 

@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import DataContext from "./context/context";
+import { DataProvider } from "./context/context";
 
 import Habits from "./Habits";
 import Login from "./Login"
@@ -11,12 +9,8 @@ import Historic from "./Historic";
 import Today from "./Hoje";
 
 export default function App(){
-    const [token, setToken] = useState("")
-    const [percent, setPercent] = useState("")
-
-
     return(
-        <DataContext.Provider value={{token, setToken, percent, setPercent}}>
+        <DataProvider>
             <BrowserRouter>
             <GlobalStyle />
             <Routes>
@@ -27,6 +21,6 @@ export default function App(){
                 <Route path="/historico" element={<Historic/>} > </Route>
             </Routes>
             </BrowserRouter>        
-        </DataContext.Provider>
+        </DataProvider>
     )
 }

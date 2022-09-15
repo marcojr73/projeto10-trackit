@@ -5,7 +5,7 @@ import { useContext } from "react";
 
 import 'react-circular-progressbar/dist/styles.css';
 import styled from "styled-components"
-import DataContext from "./context/context";
+import {DataContext} from "./context/context";
 
 export default function Footer() {
     const {percent} = useContext(DataContext)

@@ -4,7 +4,7 @@ import { useContext } from "react"
 
 import axios from "axios"
 import Container from "./layout/start" 
-import DataContext from "./context/context"
+import {DataContext} from "./context/context"
 import Loader from "./layout/loader"
 
 import logo from "../assets/images/logo.png"

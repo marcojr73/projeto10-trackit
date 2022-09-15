@@ -19,7 +19,7 @@ export default function ListToDay({setPercent}) {
         const promisse = axios.get(url, config);
         promisse.then(response => {
         setHabits(response.data)
-
+        calculator()
         })
         promisse.catch(err => console.log(err))
     }, [])
@@ -41,15 +41,15 @@ export default function ListToDay({setPercent}) {
         promisse.catch (err => alert("deu ruim"))
     }
 
+    function calculator(){
+        const hits = []
+        habits.forEach(habit => {
+            habit.done === true ? hits.push(1) : <></>
+        })
+        setPercent((hits.length/habits.length))
+    }
+
     if (habits.length > 0) {
-        calculator()
-        function calculator(){
-            const hits = []
-            habits.forEach(habit => {
-                habit.done === true ? hits.push(1) : <></>
-            })
-            setPercent((hits.length/habits.length))
-        }
         return (
             <>
                 {
