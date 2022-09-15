@@ -36,11 +36,14 @@ export default function ListHabits({ token, setInfo, listHabits, setListHabits, 
         promisse.then(response => {
             setListHabits([...response.data])
         })
-        promisse.catch(err => alert("Não consegui carregar os seus hábitos"))
+        promisse.catch(err => alert("Não foi possível carregar os seus hábitos"))
     }, [config,setListHabits,urlLoad])
 
-    if (listHabits.length !== 0) {
+    useEffect(() => {
         setInfo(false)
+    }, [listHabits])
+
+    if (listHabits.length !== 0) {
         return (
             <div>
                 {
