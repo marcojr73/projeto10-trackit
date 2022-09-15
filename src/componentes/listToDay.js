@@ -19,10 +19,13 @@ export default function ListToDay({setPercent}) {
         const promisse = axios.get(url, config);
         promisse.then(response => {
         setHabits(response.data)
-
         })
         promisse.catch(err => console.log(err))
     }, [])
+
+    useEffect(() => {
+        if (habits.length > 0) calculator()
+    }, [habits])
     
     function toggle(id, status){
         const urlCheck = 
@@ -50,7 +53,6 @@ export default function ListToDay({setPercent}) {
     }
 
     if (habits.length > 0) {
-        calculator()
         return (
             <>
                 {
