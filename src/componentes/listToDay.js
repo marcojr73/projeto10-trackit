@@ -19,7 +19,7 @@ export default function ListToDay({setPercent}) {
         const promisse = axios.get(url, config);
         promisse.then(response => {
         setHabits(response.data)
-        calculator()
+
         })
         promisse.catch(err => console.log(err))
     }, [])
@@ -50,6 +50,7 @@ export default function ListToDay({setPercent}) {
     }
 
     if (habits.length > 0) {
+        calculator()
         return (
             <>
                 {

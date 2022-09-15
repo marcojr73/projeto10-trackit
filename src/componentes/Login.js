@@ -11,27 +11,24 @@ import logo from "../assets/images/logo.png"
 
 export default function Login(){
     const [load, setLoad] = useState("Entrar")
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
     const objLogin = {email:email, password:password}
-    const navigate = useNavigate();
-
-    const token = useContext(DataContext);
+    const navigate = useNavigate()
 
     function logUser(e){
         e.preventDefault();
 
-        const promisse = axios.post(url, objLogin);
+        console.log(url, objLogin)
+        const promisse = axios.post(url, objLogin)
         setLoad(<Loader/>)
 
         promisse.then(response => {
             const data = response.data;
+            console.log(data)
             const handle = JSON.stringify(data)
             localStorage.setItem("user", handle)
-
-            token.setToken(data)
-
             navigate("/hoje")
         })
         promisse.catch(err => {
