@@ -10,7 +10,6 @@ import Loader from "./layout/loader"
 import logo from "../assets/images/logo.png"
 
 export default function Login(){
-
     const [load, setLoad] = useState("Entrar")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -23,12 +22,11 @@ export default function Login(){
     function logUser(e){
         e.preventDefault();
 
-        const promisse = axios.post(url,objLogin);
+        const promisse = axios.post(url, objLogin);
         setLoad(<Loader/>)
 
         promisse.then(response => {
-            const {data} = response;
-
+            const data = response.data;
             const handle = JSON.stringify(data)
             localStorage.setItem("user", handle)
 
