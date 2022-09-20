@@ -7,14 +7,13 @@ import Loader from "./layout/loader"
 import logo from "../assets/images/logo.png"
 
 export default function Login(){
-    const [load, setLoad] = useState("")
-    const [email, setEmail] = useState("")
+    const [load, setLoad] = useState("Entrar")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
     
     function logUser(e){
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
-        const data = {email, password}
+        const data = {email: "marcojunior@engenharia.ufjf.br", password}
         e.preventDefault();
 
         console.log(url, data)
@@ -38,13 +37,6 @@ export default function Login(){
         <Container>
             <img src={logo} alt="logo"/> 
             <form onSubmit={logUser} >
-                <input  value={email}
-                        onChange={(e)=>setEmail(e.target.value)} 
-                        className="e-mail" 
-                        placeholder="email" 
-                        disabled={load !== "Entrar" ? true : false}
-                        type="email">
-                </input>
                 <input  value={password} 
                         onChange={(e)=>setPassword(e.target.value)} 
                         className="pass" 
