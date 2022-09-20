@@ -7,13 +7,6 @@ import Loader from "./layout/loader"
 import logo from "../assets/images/logo.png"
 
 export default function Login(){
-    const [load, setLoad] = useState("Entrar")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
-    const objLogin = {email:email, password:password}
-    const navigate = useNavigate()
-
     return(
         <Container>
             <img src={logo} alt="logo"/> 
