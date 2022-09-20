@@ -7,23 +7,22 @@ import Loader from "./layout/loader"
 import logo from "../assets/images/logo.png"
 
 export default function Login(){
-    const [email, setEmail] = useState("")
+    const [load, setLoad] = useState("Entrar")
     
     function logUser(e){
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
-        const objLogin = {email, password:"password"}
+        const objLogin = {email: "email", password:"password"}
         e.preventDefault();
 
-        console.log(url, objLogin)
         const promisse = axios.post(url, objLogin)
-
+        setLoad(<Loader/>)
         promisse.then(response => {
             const data = response.data;
-            console.log(data)
             const handle = JSON.stringify(data)
             localStorage.setItem("user", handle)
         })
         promisse.catch(err => {
+            setLoad("Entrar")
             alert("usuário não encontrado")
         })
     }
@@ -32,9 +31,8 @@ export default function Login(){
         <Container>
             <img src={logo} alt="logo"/> 
             <form onSubmit={logUser} >
-                <input  value={email}
+                <input  value={"email"}
                         className="e-mail" 
-                        onChange={(e)=>setEmail(e.target.value)} 
                         placeholder="email" 
                         type="email">
                 </input>
@@ -44,7 +42,7 @@ export default function Login(){
                         type="password">
                         
                 </input>
-                <button className="sub" type="submit" >load</button>
+                <button className="sub" type="submit" >{load}</button>
             </form>
             <Link to="/cadastro">
                 <p className="to-register">Não tem uma conta? Cadastre-se!</p>
