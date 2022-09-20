@@ -1,11 +1,10 @@
-import { useState } from "react/cjs/react.development"
-
 import Top from "./Top"
 import styled from "styled-components"
 import Footer from "./Footer"
 import CreateHabit from "./CreateHabit"
 import Info from "./info"
 import ListHabits from "./ListHabits"
+import { useState } from "react"
 
 export default function Habits(){
     const [info, setInfo] = useState(true);
