@@ -14,26 +14,6 @@ export default function Login(){
     const objLogin = {email:email, password:password}
     const navigate = useNavigate()
 
-    function logUser(e){
-        e.preventDefault();
-
-        console.log(url, objLogin)
-        const promisse = axios.post(url, objLogin)
-        setLoad(<Loader/>)
-
-        promisse.then(response => {
-            const data = response.data;
-            console.log(data)
-            const handle = JSON.stringify(data)
-            localStorage.setItem("user", handle)
-            navigate("/hoje")
-        })
-        promisse.catch(err => {
-            setLoad("Entrar")
-            alert("usuário não encontrado")
-        })
-    }
-
     return(
         <Container>
             <img src={logo} alt="logo"/> 
