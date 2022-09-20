@@ -17,24 +17,6 @@ export default function Login(){
     return(
         <Container>
             <img src={logo} alt="logo"/> 
-            <form onSubmit={logUser} >
-                <input  value={email}
-                        onChange={(e)=>setEmail(e.target.value)} 
-                        className="e-mail" 
-                        placeholder="email" 
-                        disabled={load !== "Entrar" ? true : false}
-                        type="email">
-                </input>
-                <input  value={password} 
-                        onChange={(e)=>setPassword(e.target.value)} 
-                        className="pass" 
-                        placeholder="senha" 
-                        disabled={load !== "Entrar" ? true : false}
-                        type="password">
-                        
-                </input>
-                <button className="sub" type="submit" >{load}</button>
-            </form>
             <Link to="/cadastro">
                 <p className="to-register">Não tem uma conta? Cadastre-se!</p>
             </Link>
