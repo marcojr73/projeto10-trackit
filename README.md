@@ -9,7 +9,7 @@
 - Esta é uma aplicação web onde você pode gerenciar os seus hábitos
 - Você pode criar um hábido, selecionar quais dias você os quer praticar e visualizar quais hábitos você tem que praticar no dia de hoje
 
-- [Veja meu deploy na Vercel aqui](https://)
+- [Veja meu deploy na Vercel aqui](https://projeto10-trackit-nine-rho.vercel.app/)
 
 ***
 
